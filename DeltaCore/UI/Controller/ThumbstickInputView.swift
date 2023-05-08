@@ -55,8 +55,8 @@ class ThumbstickInputView: UIView
     private let imageView = UIImageView(image: nil)
     private let panGestureRecognizer = ImmediatePanGestureRecognizer(target: nil, action: nil)
     
-    private let lightFeedbackGenerator = UISelectionFeedbackGenerator()
-    private let mediumFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    private var lightFeedbackGenerator: UIImpactFeedbackGenerator?
+    private var mediumFeedbackGenerator: UIImpactFeedbackGenerator?
     
     private var isActivated = false
     
@@ -69,6 +69,15 @@ class ThumbstickInputView: UIView
     
     override init(frame: CGRect)
     {
+        
+        if #available(iOS 13.0, *) {
+            self.lightFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
+            self.mediumFeedbackGenerator = UIImpactFeedbackGenerator(style: .rigid)
+        } else {
+            self.lightFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+            self.mediumFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+        }
+        
         super.init(frame: frame)
         
         self.panGestureRecognizer.addTarget(self, action: #selector(ThumbstickInputView.handlePanGesture(_:)))
@@ -106,8 +115,8 @@ private extension ThumbstickInputView
             
             if self.isHapticFeedbackEnabled
             {
-                self.lightFeedbackGenerator.prepare()
-                self.mediumFeedbackGenerator.prepare()
+                self.lightFeedbackGenerator?.prepare()
+                self.mediumFeedbackGenerator?.prepare()
             }
             
             self.update()
@@ -154,7 +163,11 @@ private extension ThumbstickInputView
             
             if self.isHapticFeedbackEnabled
             {
-                self.mediumFeedbackGenerator.impactOccurred()
+                if #available(iOS 13.0, *) {
+                    self.lightFeedbackGenerator?.impactOccurred(intensity: 0.8)
+                } else {
+                    self.lightFeedbackGenerator?.impactOccurred()
+                }
             }
             
             self.update()
@@ -199,7 +212,7 @@ private extension ThumbstickInputView
         var adjustedY = distance * sin(angle)
         adjustedY += center.y
         
-        let insetSideLength = maximumDistance / sqrt(2)
+        let insetSideLength = maximumDistance * 1.5
         let insetFrame = CGRect(x: center.x - insetSideLength / 2,
                                 y: center.y - insetSideLength / 2,
                                 width: insetSideLength,
@@ -232,9 +245,13 @@ private extension ThumbstickInputView
         
         if let direction = Direction(xAxis: xAxis, yAxis: yAxis, threshold: threshold)
         {
-            if self.previousDirection != direction && self.isHapticFeedbackEnabled
+            if self.previousDirection != direction && self.isHapticFeedbackEnabled && magnitude > 0.7
             {
-                self.mediumFeedbackGenerator.impactOccurred()
+                if #available(iOS 13.0, *) {
+                    self.mediumFeedbackGenerator?.impactOccurred(intensity: 0.8)
+                } else {
+                    self.mediumFeedbackGenerator?.impactOccurred()
+                }
             }
             
             self.previousDirection = direction
@@ -243,7 +260,11 @@ private extension ThumbstickInputView
         {
             if isActivated && !self.isActivated && self.isHapticFeedbackEnabled
             {
-                self.lightFeedbackGenerator.selectionChanged()
+                if #available(iOS 13.0, *) {
+                    self.lightFeedbackGenerator?.impactOccurred(intensity: 0.9)
+                } else {
+                    self.lightFeedbackGenerator?.impactOccurred()
+                }
             }
             
             self.previousDirection = nil
