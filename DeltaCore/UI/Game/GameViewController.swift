@@ -372,7 +372,31 @@ open class GameViewController: UIViewController, GameControllerReceiver
         }
         else
         {
-            self.gameView.frame = gameScreenFrame
+            var screenAspectRatioToUse = screenAspectRatio
+            var availableGameFrameToUse = availableGameFrame
+            
+            // HACK - 4:3 aspect ratio for appropriate consoles
+            // To-do : Add proper cores instead of random resolution check
+            if(screenAspectRatio.height == 240 && screenAspectRatio.width == 256 ||
+               screenAspectRatio.height == 224 && screenAspectRatio.width == 256 ||
+               screenAspectRatio.height == 576 && screenAspectRatio.width == 720)
+            {
+                screenAspectRatioToUse = CGSize(width: screenAspectRatio.width, height: screenAspectRatio.height / (8/7))
+            }
+
+            // N64 should always be linear
+            // Other cores are back to nearest until I make shaders...
+            if(screenAspectRatio.height == 480 && screenAspectRatio.width == 640)
+            {
+                self.gameView.samplerMode = SamplerMode.linear
+            }
+            else
+            {
+                self.gameView.samplerMode = SamplerMode.nearestNeighbor
+            }
+            
+            let gameViewFrame = AVMakeRect(aspectRatio: screenAspectRatioToUse, insideRect: availableGameFrameToUse)
+            self.gameView.frame = gameViewFrame
         }
         
         if self.emulatorCore?.state != .running
