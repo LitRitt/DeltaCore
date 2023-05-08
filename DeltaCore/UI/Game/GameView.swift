@@ -95,7 +95,7 @@ public class GameView: UIView
             
             // TODO figure out why this isn't working
             // self.glkView.context = EAGLContext.createWithBestAvailableAPI(newValue.sharegroup)
-            self.glkView.context = EAGLContext(api: .openGLES2, sharegroup: newValue.sharegroup)!
+            self.glkView.context = EAGLContext(api: .openGLES3, sharegroup: newValue.sharegroup)!
             self.context = self.makeContext()
             
             DispatchQueue.main.async {
@@ -116,7 +116,7 @@ public class GameView: UIView
     {
         // TODO figure out why this isn't working
         // let eaglContext = EAGLContext.createWithBestAvailableAPI()
-        let eaglContext = EAGLContext(api: .openGLES2)!
+        let eaglContext = EAGLContext(api: .openGLES3)!
         self.glkView = GLKView(frame: CGRect.zero, context: eaglContext)
         
         super.init(frame: frame)
@@ -128,7 +128,7 @@ public class GameView: UIView
     {
         // TODO figure out why this isn't working
         // let eaglContext = EAGLContext.createWithBestAvailableAPI()
-        let eaglContext = EAGLContext(api: .openGLES2)!
+        let eaglContext = EAGLContext(api: .openGLES3)!
         self.glkView = GLKView(frame: CGRect.zero, context: eaglContext)
         
         super.init(coder: aDecoder)

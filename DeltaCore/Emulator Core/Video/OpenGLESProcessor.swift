@@ -35,9 +35,7 @@ class OpenGLESProcessor: VideoProcessor
     init(videoFormat: VideoFormat, context: EAGLContext)
     {
         self.videoFormat = videoFormat
-        // TODO figure out why this isn't working
-        // self.context = EAGLContext.createWithBestAvailableAPI(context.sharegroup)
-        self.context = EAGLContext(api: .openGLES2, sharegroup: context.sharegroup)!
+        self.context = EAGLContext(api: .openGLES3, sharegroup: context.sharegroup)!
     }
     
     deinit
