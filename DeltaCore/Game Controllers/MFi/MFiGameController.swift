@@ -161,7 +161,9 @@ public class MFiGameController: NSObject, GameController
         let triggerChangedHandler: (_ input: MFiGameController.Input, _ value: Float) -> Void = { [unowned self] (input, value) in
             if value > self.triggerDeadzone
             {
-                self.activate(input)
+                if !self.activatedInputs.keys.contains(where: { $0.stringValue == AnyInput(input).stringValue }) {
+                    self.activate(input)
+                }
             }
             else
             {
