@@ -120,6 +120,12 @@ public class ControllerView: UIView, GameController
         }
     }
     
+    public var isRelativeTrackingEnabled = true {
+        didSet {
+            self.thumbstickViews.values.forEach { $0.isRelativeTrackingEnabled = self.isRelativeTrackingEnabled }
+        }
+    }
+    
     public var isButtonTouchOverlayEnabled = true {
         didSet {
             self.buttonsView.isTouchOverlayEnabled = self.isButtonTouchOverlayEnabled

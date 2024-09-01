@@ -39,6 +39,8 @@ class ThumbstickInputView: UIView
     var isHapticFeedbackEnabled = true
     var isClickyHapticEnabled = true
     
+    var isRelativeTrackingEnabled = true
+    
     var hapticFeedbackStrength = 1.0
     
     var valueChangedHandler: ((Double, Double) -> Void)?
@@ -104,33 +106,10 @@ private extension ThumbstickInputView
 {
     @objc func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer)
     {
-        switch gestureRecognizer.state
+        func updateTouchLocation(_ origin: CGPoint?)
         {
-        case .began:
-            let location = gestureRecognizer.location(in: self)
-            self.trackingOrigin = location
+            guard var origin = origin else { return }
             
-            if self.isHapticFeedbackEnabled
-            {
-                self.lightFeedbackGenerator?.prepare()
-                self.mediumFeedbackGenerator?.prepare()
-            }
-            
-            self.update()
-            
-        case .changed:
-            // When initially tracking the gesture, we calculate the translation
-            // relative to where the user began the pan gesture.
-            // This works well, but becomes weird once we leave the bounds then return later,
-            // since it's more obvious at that point if the thumbstick position doesn't match the user's finger.
-            //
-            // To compensate, once we've left the bounds (and have reached maximum translation),
-            // we reset the origin we're using for calculation to 0.
-            // This won't change the visual position of the thumbstick since it's snapped to the edge,
-            // but will correctly track user's finger upon re-entering the bounds.
-            
-            guard var origin = self.trackingOrigin else { break }
-
             let location = gestureRecognizer.location(in: self)
             let translationX = location.x - origin.x
             let translationY = location.y - origin.y
@@ -154,7 +133,37 @@ private extension ThumbstickInputView
             let translation = CGPoint(x: translationX, y: translationY)
             self.update(translation)
             
-            self.trackingOrigin = origin
+            self.trackingOrigin = self.isRelativeTrackingEnabled ? origin : CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+        }
+        
+        switch gestureRecognizer.state
+        {
+        case .began:
+            let location = gestureRecognizer.location(in: self)
+            self.trackingOrigin = self.isRelativeTrackingEnabled ? location : CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+            
+            if self.isHapticFeedbackEnabled
+            {
+                self.lightFeedbackGenerator?.prepare()
+                self.mediumFeedbackGenerator?.prepare()
+            }
+            
+            updateTouchLocation(self.trackingOrigin)
+            
+        case .changed:
+            // When initially tracking the gesture, we calculate the translation
+            // relative to where the user began the pan gesture.
+            // This works well, but becomes weird once we leave the bounds then return later,
+            // since it's more obvious at that point if the thumbstick position doesn't match the user's finger.
+            //
+            // To compensate, once we've left the bounds (and have reached maximum translation),
+            // we reset the origin we're using for calculation to 0.
+            // This won't change the visual position of the thumbstick since it's snapped to the edge,
+            // but will correctly track user's finger upon re-entering the bounds.
+            
+            guard var origin = self.trackingOrigin else { break }
+            
+            updateTouchLocation(origin)
             
         case .ended, .cancelled:
             
