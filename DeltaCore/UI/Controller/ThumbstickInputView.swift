@@ -161,7 +161,7 @@ private extension ThumbstickInputView
             // This won't change the visual position of the thumbstick since it's snapped to the edge,
             // but will correctly track user's finger upon re-entering the bounds.
             
-            guard var origin = self.trackingOrigin else { break }
+            guard let origin = self.trackingOrigin else { break }
             
             updateTouchLocation(origin)
             
