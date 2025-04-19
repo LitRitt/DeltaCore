@@ -19,5 +19,5 @@ FOUNDATION_EXPORT const unsigned char DeltaCoreVersionString[];
 #import <DeltaCore/DLTAMuteSwitchMonitor.h>
 
 // HACK: Needed because the generated DeltaCore-Swift header file uses @import syntax, which isn't supported in Objective-C++ code.
-#import <GLKit/GLKit.h>
+#import <MetalKit/MetalKit.h>
 #import <AVFoundation/AVFoundation.h>

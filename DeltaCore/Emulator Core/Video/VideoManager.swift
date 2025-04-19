@@ -9,7 +9,7 @@
 import Foundation
 import Accelerate
 import CoreImage
-import GLKit
+import MetalKit
 
 protocol VideoProcessor
 {
@@ -54,13 +54,7 @@ public class VideoManager: NSObject, VideoRendering
     
     public var isEnabled = true
     
-    public var renderingAPI: EAGLRenderingAPI = .openGLES3 {
-        didSet {
-            self.updateProcessor()
-        }
-    }
-    
-    private var context: EAGLContext
+//    private var context: EAGLContext
     private var ciContext: CIContext
     
     private var processor: VideoProcessor
@@ -74,13 +68,12 @@ public class VideoManager: NSObject, VideoRendering
     public init(videoFormat: VideoFormat)
     {
         self.videoFormat = videoFormat
-        self.context = EAGLContext(api: self.renderingAPI)!
-        self.ciContext = CIContext(eaglContext: self.context, options: [.workingColorSpace: NSNull()])
         
         switch videoFormat.format
         {
-        case .bitmap: self.processor = BitmapProcessor(videoFormat: videoFormat)
-        case .openGLES: self.processor = OpenGLESProcessor(videoFormat: videoFormat, context: self.context, renderingAPI: self.renderingAPI)
+        case .bitmap:
+            self.ciContext = CIContext(options: [.workingColorSpace: NSNull()])
+            self.processor = BitmapProcessor(videoFormat: videoFormat)
         }
         
         super.init()
@@ -94,20 +87,6 @@ public class VideoManager: NSObject, VideoRendering
         {
         case .bitmap:
             self.processor = BitmapProcessor(videoFormat: self.videoFormat)
-            
-        case .openGLES:
-            guard let processor = self.processor as? OpenGLESProcessor else { return }
-            processor.videoFormat = self.videoFormat
-            
-            self.context = EAGLContext(api: self.renderingAPI)!
-            self.ciContext = CIContext(eaglContext: self.context, options: [.workingColorSpace: NSNull()])
-            processor.context = EAGLContext(api: self.renderingAPI, sharegroup: self.context.sharegroup)!
-            
-            for gameView in self.gameViews
-            {
-                gameView.renderingAPI = self.renderingAPI
-                gameView.eaglContext = self.context
-            }
         }
         
         self.processor.viewport = self.viewport
@@ -125,8 +104,6 @@ public extension VideoManager
     {
         guard !self.gameViews.contains(gameView) else { return }
         
-        gameView.renderingAPI = self.renderingAPI
-        gameView.eaglContext = self.context
         self._gameViews.add(gameView)
     }
     

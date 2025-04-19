@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ACE5985A2DB3F1780010112D /* OpenGLESProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE598592DB3F1720010112D /* OpenGLESProcessor.swift */; };
 		BF0B260B23E91745007BE38B /* Bundle+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0B260A23E91745007BE38B /* Bundle+Resources.swift */; };
 		BF0BC4FA225C138A000151C6 /* BitmapProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0BC4F9225C138A000151C6 /* BitmapProcessor.swift */; };
-		BF0BC4FD225C15E8000151C6 /* OpenGLESProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0BC4FC225C15E8000151C6 /* OpenGLESProcessor.swift */; };
 		BF1FB1791C5EE4B7007E2494 /* SaveStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1FB1781C5EE4B7007E2494 /* SaveStateProtocol.swift */; };
 		BF1FB1891C5EEC14007E2494 /* SaveState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1FB1881C5EEC14007E2494 /* SaveState.swift */; };
 		BF27601122F8CE3C005D98FE /* ImmediatePanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF27601022F8CE3C005D98FE /* ImmediatePanGestureRecognizer.swift */; };
@@ -100,9 +100,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ACE598592DB3F1720010112D /* OpenGLESProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLESProcessor.swift; sourceTree = "<group>"; };
 		BF0B260A23E91745007BE38B /* Bundle+Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Resources.swift"; sourceTree = "<group>"; };
 		BF0BC4F9225C138A000151C6 /* BitmapProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmapProcessor.swift; sourceTree = "<group>"; };
-		BF0BC4FC225C15E8000151C6 /* OpenGLESProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLESProcessor.swift; sourceTree = "<group>"; };
 		BF1FB1781C5EE4B7007E2494 /* SaveStateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveStateProtocol.swift; sourceTree = "<group>"; };
 		BF1FB1881C5EEC14007E2494 /* SaveState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveState.swift; sourceTree = "<group>"; };
 		BF2722091F40FB2100E19007 /* MFiGameController.deltamapping */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = MFiGameController.deltamapping; sourceTree = "<group>"; };
@@ -411,10 +411,10 @@
 		BFD78F591C994587000441FC /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				ACE598592DB3F1720010112D /* OpenGLESProcessor.swift */,
 				BF57D1F71EA6DF840013CB1D /* VideoFormat.swift */,
 				BFD78F611C994596000441FC /* VideoManager.swift */,
 				BF0BC4F9225C138A000151C6 /* BitmapProcessor.swift */,
-				BF0BC4FC225C15E8000151C6 /* OpenGLESProcessor.swift */,
 				BF5E0D9025AE67AD00A3E4A8 /* RenderThread.swift */,
 			);
 			path = Video;
@@ -578,6 +578,7 @@
 				BFA5FCEE20D37FF800A3C5AB /* KeyboardResponder.swift in Sources */,
 				BF57D1F81EA6DF840013CB1D /* VideoFormat.swift in Sources */,
 				BFA5FCF520D3804400A3C5AB /* UIApplication+AppExtension.swift in Sources */,
+				ACE5985A2DB3F1780010112D /* OpenGLESProcessor.swift in Sources */,
 				BFA5FCEF20D37FF800A3C5AB /* KeyboardGameController.swift in Sources */,
 				BF92794F1D2B2C25003084F3 /* UIScreen+ControllerSkin.swift in Sources */,
 				BF1FB1791C5EE4B7007E2494 /* SaveStateProtocol.swift in Sources */,
@@ -594,7 +595,6 @@
 				BF27601122F8CE3C005D98FE /* ImmediatePanGestureRecognizer.swift in Sources */,
 				BF27601D22F91342005D98FE /* TouchInputView.swift in Sources */,
 				BF0B260B23E91745007BE38B /* Bundle+Resources.swift in Sources */,
-				BF0BC4FD225C15E8000151C6 /* OpenGLESProcessor.swift in Sources */,
 				BF0BC4FA225C138A000151C6 /* BitmapProcessor.swift in Sources */,
 				BF9279511D2B2FC6003084F3 /* ControllerSkinTraits.swift in Sources */,
 				BFA5FCF220D3800000A3C5AB /* MFiGameController.swift in Sources */,

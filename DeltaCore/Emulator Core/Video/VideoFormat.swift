@@ -14,7 +14,6 @@ extension VideoFormat
     public enum Format: Equatable
     {
         case bitmap(PixelFormat)
-        case openGLES
     }
     
     public enum PixelFormat: Equatable
