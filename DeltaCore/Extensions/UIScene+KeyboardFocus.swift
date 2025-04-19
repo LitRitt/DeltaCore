@@ -26,6 +26,12 @@ extension UIScene
             return true
         }
         
+        guard !ProcessInfo.processInfo.isiOSAppOnMac && !ProcessInfo.processInfo.isRunningOnVisionPro else {
+            // scene._isTargetOfKeyboardEventDeferringEnvironment always returns false when running on macOS and visionOS,
+            // so return true instead to ensure everything continues working.
+            return true
+        }
+        
         let scene = unsafeBitCast(self, to: UIScenePrivate.self)
         let hasKeyboardFocus = scene._isTargetOfKeyboardEventDeferringEnvironment
         return hasKeyboardFocus
@@ -91,5 +97,22 @@ private extension UIScene
         {
             NotificationCenter.default.post(name: UIScene.keyboardFocusDidChangeNotification, object: self)
         }
+    }
+}
+
+import Foundation
+import LocalAuthentication
+
+public extension ProcessInfo {
+    var isRunningOnVisionPro: Bool {
+        // Returns true even when running on iOS :/
+        // guard #available(visionOS 1, *) else { return false }
+        // return true
+
+        let context = LAContext()
+        _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) // Sets .biometryType when called.
+
+        // Can't reference `.opticID` due to bug with #available, so check if .biometryType isn't one of the other types instead.
+        return context.biometryType != .faceID && context.biometryType != .touchID && context.biometryType != .none
     }
 }
