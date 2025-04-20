@@ -53,10 +53,6 @@ let package = Package(
             resources: [
                 .copy("Supporting Files/KeyboardGameController.deltamapping"),
                 .copy("Supporting Files/MFiGameController.deltamapping"),
-            ],
-            cSettings: [
-                .define("GLES_SILENCE_DEPRECATION"),
-                .define("CI_SILENCE_GL_DEPRECATION")
             ]
         ),
     ]
