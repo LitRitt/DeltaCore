@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC8F12132DB54F89005CCC34 /* OpenEmuShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8F120D2DB54F79005CCC34 /* OpenEmuShaders.framework */; };
 		ACE5985A2DB3F1780010112D /* OpenGLESProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE598592DB3F1720010112D /* OpenGLESProcessor.swift */; };
 		BF0B260B23E91745007BE38B /* Bundle+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0B260A23E91745007BE38B /* Bundle+Resources.swift */; };
 		BF0BC4FA225C138A000151C6 /* BitmapProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0BC4F9225C138A000151C6 /* BitmapProcessor.swift */; };
@@ -76,6 +77,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AC8F120C2DB54F79005CCC34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC8F12052DB54F79005CCC34 /* OpenEmuShaders.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05EEE338227CC35D007D011B;
+			remoteInfo = OpenEmuShaders;
+		};
+		AC8F120E2DB54F79005CCC34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC8F12052DB54F79005CCC34 /* OpenEmuShaders.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05EEE341227CC35D007D011B;
+			remoteInfo = OpenEmuShadersTests;
+		};
+		AC8F12102DB54F79005CCC34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC8F12052DB54F79005CCC34 /* OpenEmuShaders.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 058AB9AC285130A4009A35FA;
+			remoteInfo = oeshaders;
+		};
 		BFA07F06221F3A070012699D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFCBD90B20CC6F6F0028E309 /* ZIPFoundation.xcodeproj */;
@@ -100,6 +122,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC8F12052DB54F79005CCC34 /* OpenEmuShaders.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenEmuShaders.xcodeproj; path = "External/OpenEmu-Shaders/OpenEmuShaders.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		ACE598592DB3F1720010112D /* OpenGLESProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLESProcessor.swift; sourceTree = "<group>"; };
 		BF0B260A23E91745007BE38B /* Bundle+Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Resources.swift"; sourceTree = "<group>"; };
 		BF0BC4F9225C138A000151C6 /* BitmapProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmapProcessor.swift; sourceTree = "<group>"; };
@@ -176,12 +199,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFCBD91C20CC6F790028E309 /* ZIPFoundation.framework in Frameworks */,
+				AC8F12132DB54F89005CCC34 /* OpenEmuShaders.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC8F12062DB54F79005CCC34 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC8F120D2DB54F79005CCC34 /* OpenEmuShaders.framework */,
+				AC8F120F2DB54F79005CCC34 /* OpenEmuShadersTests.xctest */,
+				AC8F12112DB54F79005CCC34 /* oeshaders */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BF27600D22F8CD73005D98FE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				BFCBD90B20CC6F6F0028E309 /* ZIPFoundation.xcodeproj */,
+				AC8F12052DB54F79005CCC34 /* OpenEmuShaders.xcodeproj */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -522,6 +557,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = AC8F12062DB54F79005CCC34 /* Products */;
+					ProjectRef = AC8F12052DB54F79005CCC34 /* OpenEmuShaders.xcodeproj */;
+				},
+				{
 					ProductGroup = BFCBD90C20CC6F6F0028E309 /* Products */;
 					ProjectRef = BFCBD90B20CC6F6F0028E309 /* ZIPFoundation.xcodeproj */;
 				},
@@ -534,6 +573,27 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		AC8F120D2DB54F79005CCC34 /* OpenEmuShaders.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OpenEmuShaders.framework;
+			remoteRef = AC8F120C2DB54F79005CCC34 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AC8F120F2DB54F79005CCC34 /* OpenEmuShadersTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OpenEmuShadersTests.xctest;
+			remoteRef = AC8F120E2DB54F79005CCC34 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AC8F12112DB54F79005CCC34 /* oeshaders */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = oeshaders;
+			remoteRef = AC8F12102DB54F79005CCC34 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BFCBD91120CC6F6F0028E309 /* ZIPFoundation.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
