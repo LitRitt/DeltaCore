@@ -1,6 +1,0 @@
-[submodule "External/ZIPFoundation"]
-	path = External/ZIPFoundation
-	url = https://github.com/rileytestut/ZIPFoundation.git
-[submodule "External/OpenEmu-Shaders"]
-	path = External/OpenEmu-Shaders
-	url = https://github.com/LitRitt/OpenEmu-Shaders.git
