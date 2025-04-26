@@ -13,7 +13,6 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "ZIPFoundation", url: "https://github.com/weichsel/ZIPFoundation.git", .upToNextMinor(from: "0.9.11")),
-        .package(name: "OpenEmuShaders", url: "https://github.com/LitRitt/OpenEmuShaders.git", .branch("master")),
     ],
     targets: [
         .target(
@@ -44,7 +43,7 @@ let package = Package(
         ),
         .target(
             name: "DeltaCore",
-            dependencies: ["CDeltaCore", "ZIPFoundation", "OpenEmuShaders"],
+            dependencies: ["CDeltaCore", "ZIPFoundation"],
             path: "DeltaCore",
             exclude: [
                 "DeltaTypes.m",
